@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMich Cardiology Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maize: #FFCB05;
+    --blue: #00274C;
+    --blue-mid: #0A3D6B;
+    --blue-light: #1565A0;
+    --blue-pale: #E8F0F8;
+    --white: #FFFFFF;
+    --gray-100: #F4F6F9;
+    --gray-200: #E2E8F0;
+    --gray-500: #718096;
+    --gray-700: #2D3748;
+    --red-accent: #C5382B;
+    --green-accent: #1A7A4A;
+    --shadow: 0 4px 24px rgba(0,39,76,0.10);
+    --shadow-lg: 0 8px 40px rgba(0,39,76,0.16);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    min-height: 100vh;
+  }
+
+  /* ─── TOP BAR ─── */
+  .topbar {
+    background: var(--blue);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 32px;
+  }
+  .topbar a { color: var(--maize); text-decoration: none; margin-left: 18px; }
+  .topbar a:hover { text-decoration: underline; }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--blue);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-m {
+    width: 44px;
+    height: 44px;
+    background: var(--maize);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--blue);
+    flex-shrink: 0;
+  }
+  .logo-text {
+    line-height: 1.2;
+  }
+  .logo-text .dept {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+  .logo-text .sub {
+    font-size: 0.7rem;
+    color: var(--maize);
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  nav { display: flex; gap: 6px; }
+  nav button {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.75);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  nav button:hover, nav button.active {
+    background: rgba(255,203,5,0.15);
+    color: var(--maize);
+  }
+  nav button.active { border-bottom: 2px solid var(--maize); border-radius: 6px 6px 0 0; }
+
+  /* ─── HERO BANNER ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 60%, var(--blue-light) 100%);
+    color: var(--white);
+    padding: 40px 32px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: rgba(255,203,5,0.07);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: 80px; bottom: -80px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,203,5,0.05);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--maize); }
+  .hero p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 20px;
+    max-width: 560px;
+  }
+  .hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    background: rgba(255,203,5,0.18);
+    border: 1px solid rgba(255,203,5,0.35);
+    color: var(--maize);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    color: var(--gray-500);
+    font-size: 0.88rem;
+    margin-bottom: 24px;
+  }
+
+  /* ─── GRID LAYOUTS ─── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media(max-width: 900px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  }
+  @media(max-width: 600px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    nav button { font-size: 0.75rem; padding: 6px 10px; }
+    header { padding: 0 16px; }
+    main { padding: 20px 12px 60px; }
+  }
+
+  /* ─── CARD ─── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+  /* ─── QUICK LINKS ─── */
+  .quick-link {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 4px solid transparent;
+    text-decoration: none;
+    color: inherit;
+  }
+  .quick-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-left-color: var(--maize);
+  }
+  .ql-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .ql-blue { background: var(--blue-pale); }
+  .ql-maize { background: #FFF8DC; }
+  .ql-green { background: #E6F4ED; }
+  .ql-red { background: #FDECEA; }
+  .ql-text .ql-label {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--blue);
+    margin-bottom: 2px;
+  }
+  .ql-text .ql-desc {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+  }
+  .ql-arrow { margin-left: auto; color: var(--gray-500); font-size: 1rem; }
+
+  /* ─── UPCOMING EVENTS ─── */
+  .event-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--gray-200);
+    align-items: flex-start;
+  }
+  .event-item:last-child { border-bottom: none; }
+  .event-date-box {
+    background: var(--blue);
+    color: var(--white);
+    border-radius: 8px;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .event-date-box .month { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--maize); font-weight: 600; }
+  .event-date-box .day { font-size: 1.3rem; font-weight: 700; line-height: 1; }
+  .event-info .event-title { font-weight: 600; font-size: 0.9rem; color: var(--blue); margin-bottom: 3px; }
+  .event-info .event-meta { font-size: 0.78rem; color: var(--gray-500); display: flex; gap: 12px; flex-wrap: wrap; }
+  .event-info .event-meta span { display: flex; align-items: center; gap: 4px; }
+  .event-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .tag-gr { background: #E8F0F8; color: var(--blue); }
+  .tag-cme { background: #E6F4ED; color: var(--green-accent); }
+  .tag-conf { background: #FFF8DC; color: #7A6000; }
+
+  /* ─── CALENDAR ─── */
+  .cal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .cal-nav-btn {
+    background: var(--blue-pale);
+    border: none;
+    color: var(--blue);
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.15s;
+  }
+  .cal-nav-btn:hover { background: var(--maize); }
+  .cal-month-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--blue);
+    font-weight: 600;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-dow {
+    text-align: center;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--gray-500);
+    padding-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    cursor: default;
+    position: relative;
+  }
+  .cal-day.has-event { background: var(--blue-pale); color: var(--blue); font-weight: 600; cursor: pointer; }
+  .cal-day.has-event:hover { background: var(--blue); color: var(--white); }
+  .cal-day.today { background: var(--maize); color: var(--blue); font-weight: 700; }
+  .cal-day.empty { opacity: 0; pointer-events: none; }
+  .cal-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--maize); position: absolute; bottom: 4px; }
+  .has-event .cal-dot { background: var(--blue-light); }
+  .today .cal-dot { background: var(--blue); }
+  .cal-day:hover .cal-dot { background: var(--maize); }
+
+  /* ─── CONTACTS ─── */
+  .contact-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .contact-dept {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--blue);
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--maize);
+  }
+  .contact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  .contact-name { color: var(--gray-700); }
+  .contact-num {
+    font-weight: 600;
+    color: var(--blue);
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    background: var(--blue-pale);
+    padding: 3px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .contact-num:hover { background: var(--maize); }
+  .contact-num a { text-decoration: none; color: inherit; }
+
+  /* ─── NOMINATIONS FORM ─── */
+  .form-group { margin-bottom: 18px; }
+  .form-label {
+    display: block;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--gray-700);
+    transition: border-color 0.15s;
+    background: var(--white);
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--blue-light);
+    box-shadow: 0 0 0 3px rgba(21,101,160,0.12);
+  }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .btn {
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: 11px 28px;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.12s;
+    letter-spacing: 0.02em;
+  }
+  .btn:hover { background: var(--blue-light); transform: translateY(-1px); }
+  .btn-maize { background: var(--maize); color: var(--blue); }
+  .btn-maize:hover { background: #e6b800; }
+  .btn-sm { padding: 7px 16px; font-size: 0.8rem; }
+
+  /* ─── ALERTS / ANNOUNCEMENTS ─── */
+  .alert {
+    background: linear-gradient(90deg, var(--blue) 0%, var(--blue-mid) 100%);
+    color: var(--white);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.87rem;
+  }
+  .alert-icon { font-size: 1.2rem; }
+  .alert strong { color: var(--maize); }
+
+  /* ─── RESOURCES ─── */
+  .resource-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 8px rgba(0,39,76,0.07);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.18s;
+    border-left: 3px solid var(--blue-light);
+    margin-bottom: 10px;
+  }
+  .resource-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow);
+    border-left-color: var(--maize);
+  }
+  .resource-icon { font-size: 1.4rem; width: 36px; text-align: center; }
+  .resource-label { font-weight: 600; font-size: 0.9rem; color: var(--blue); }
+  .resource-desc { font-size: 0.77rem; color: var(--gray-500); }
+  .resource-arrow { margin-left: auto; color: var(--gray-500); }
+
+  /* ─── NOMINATIONS TABLE ─── */
+  .nom-list { margin-top: 24px; }
+  .nom-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 8px rgba(0,39,76,0.07);
+    margin-bottom: 8px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .nom-name { font-weight: 600; color: var(--blue); font-size: 0.9rem; }
+  .nom-inst { font-size: 0.78rem; color: var(--gray-500); }
+  .nom-badge {
+    font-size: 0.7rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+  .nom-new { background: #E6F4ED; color: var(--green-accent); }
+  .nom-review { background: #E8F0F8; color: var(--blue); }
+
+  /* ─── SUCCESS TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    background: var(--blue);
+    color: var(--white);
+    padding: 14px 22px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    font-size: 0.88rem;
+    font-weight: 500;
+    border-left: 4px solid var(--maize);
+    display: none;
+    z-index: 999;
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+  /* ─── FELLOWS ─── */
+  .opp-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    border-top: 4px solid var(--blue);
+    transition: transform 0.2s;
+  }
+  .opp-card:hover { transform: translateY(-3px); }
+  .opp-card.mentoring { border-top-color: var(--maize); }
+  .opp-card.research { border-top-color: var(--blue-light); }
+  .opp-type {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .type-m { color: #7A6000; }
+  .type-r { color: var(--blue-light); }
+  .opp-title { font-weight: 700; font-size: 0.95rem; color: var(--blue); margin-bottom: 6px; }
+  .opp-pi { font-size: 0.8rem; color: var(--gray-500); margin-bottom: 10px; }
+  .opp-desc { font-size: 0.82rem; line-height: 1.5; color: var(--gray-700); margin-bottom: 14px; }
+  .opp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .opp-tag { background: var(--blue-pale); color: var(--blue); font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>University of Michigan Health · Division of Cardiovascular Medicine</span>
+  <div>
+    <a href="#">Michigan Medicine</a>
+    <a href="#">Epic</a>
+    <a href="#">Intranet</a>
+    <a href="#">Help</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div class="logo-block">
+      <div class="logo-m">M</div>
+      <div class="logo-text">
+        <div class="dept">Cardiology Hub</div>
+        <div class="sub">University of Michigan · Division of Cardiovascular Medicine</div>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <button class="active" onclick="showPage('home', this)">🏠 Home</button>
+    <button onclick="showPage('calendar', this)">📅 Grand Rounds</button>
+    <button onclick="showPage('nominate', this)">🎤 Nominations</button>
+    <button onclick="showPage('resources', this)">📚 Resources</button>
+    <button onclick="showPage('contacts', this)">📞 Contacts</button>
+    <button onclick="showPage('fellows', this)">🔬 Fellows</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Welcome to the<br><span>Cardiology Clinical Hub</span></h1>
+    <p>Your centralized resource for Grand Rounds, clinical operations, CME, research opportunities, and division communications.</p>
+    <div class="hero-badges">
+      <span class="badge">Clinicians</span>
+      <span class="badge">Trainees</span>
+      <span class="badge">Faculty</span>
+      <span class="badge">Staff</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- ══════════ HOME PAGE ══════════ -->
+  <div class="page active" id="page-home">
+
+    <div class="alert">
+      <span class="alert-icon">📢</span>
+      <div><strong>Next Grand Rounds:</strong> April 4, 2025 — Dr. Eugene Braunwald, Harvard Medical School — "The Future of Heart Failure Management" · Noon, CV Center Auditorium</div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="section-title">Quick Access</div>
+    <div class="section-sub">Frequently used tools and resources for the division</div>
+    <div class="grid-4" style="margin-bottom:32px;">
+      <a class="quick-link" href="#" onclick="showPage('calendar', document.querySelector('nav button:nth-child(2)'))">
+        <div class="ql-icon ql-blue">📅</div>
+        <div class="ql-text">
+          <div class="ql-label">Grand Rounds Calendar</div>
+          <div class="ql-desc">Upcoming speakers & events</div>
+        </div>
+        <span class="ql-arrow">›</span>
+      </a>
+      <a class="quick-link" href="#">
+        <div class="ql-icon ql-maize">🎥</div>
+        <div class="ql-text">
+          <div class="ql-label">Past GR Recordings</div>
+          <div class="ql-desc">Archive on MediaSite</div>
+        </div>
+        <span class="ql-arrow">›</span>
+      </a>
+      <a class="quick-link" href="#">
+        <div class="ql-icon ql-green">🖥️</div>
+        <div class="ql-text">
+          <div class="ql-label">Live Stream (Zoom)</div>
+          <div class="ql-desc">Join Friday sessions live</div>
+        </div>
+        <span class="ql-arrow">›</span>
+      </a>
+      <a class="quick-link" href="#">
+        <div class="ql-icon ql-red">🎓</div>
+        <div class="ql-text">
+          <div class="ql-label">CME Materials</div>
+          <div class="ql-desc">Claim credits & handouts</div>
+        </div>
+        <span class="ql-arrow">›</span>
+      </a>
+    </div>
+
+    <!-- Upcoming + Mini Calendar -->
+    <div class="grid-2">
+      <div class="card">
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--blue);margin-bottom:16px;font-weight:600;">Upcoming Events</div>
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">Apr</div><div class="day">4</div></div>
+          <div class="event-info">
+            <div class="event-title">Grand Rounds — Dr. Eugene Braunwald</div>
+            <div class="event-meta">
+              <span>🕛 12:00 PM</span>
+              <span>📍 CV Center Aud.</span>
+            </div>
+            <span class="event-tag tag-gr">Grand Rounds</span>
+            <span class="event-tag tag-cme" style="margin-left:4px;">CME</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">Apr</div><div class="day">11</div></div>
+          <div class="event-info">
+            <div class="event-title">Grand Rounds — Dr. Deepak Bhatt</div>
+            <div class="event-meta">
+              <span>🕛 12:00 PM</span>
+              <span>📍 CV Center Aud. + Zoom</span>
+            </div>
+            <span class="event-tag tag-gr">Grand Rounds</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">Apr</div><div class="day">18</div></div>
+          <div class="event-info">
+            <div class="event-title">Fellows Conference — Case Presentations</div>
+            <div class="event-meta">
+              <span>🕛 12:00 PM</span>
+              <span>📍 Conference Rm B</span>
+            </div>
+            <span class="event-tag tag-conf">Conference</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">Apr</div><div class="day">25</div></div>
+          <div class="event-info">
+            <div class="event-title">Grand Rounds — TBD (Interventional)</div>
+            <div class="event-meta">
+              <span>🕛 12:00 PM</span>
+              <span>📍 CV Center Aud.</span>
+            </div>
+            <span class="event-tag tag-gr">Grand Rounds</span>
+            <span class="event-tag tag-cme" style="margin-left:4px;">CME</span>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <button class="btn btn-sm" onclick="showPage('calendar', document.querySelectorAll('nav button')[1])">View Full Calendar →</button>
+        </div>
+      </div>
+
+      <!-- Mini Calendar -->
+      <div class="card">
+        <div class="cal-header">
+          <button class="cal-nav-btn" onclick="calNav(-1)">‹</button>
+          <div class="cal-month-title" id="calTitle">April 2025</div>
+          <button class="cal-nav-btn" onclick="calNav(1)">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div style="margin-top:14px;font-size:0.78rem;color:var(--gray-500);display:flex;gap:14px;">
+          <span>🟡 Today &nbsp;</span>
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:var(--blue-pale);border-radius:3px;display:inline-block;"></span> Has Event</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ CALENDAR PAGE ══════════ -->
+  <div class="page" id="page-calendar">
+    <div class="section-title">Grand Rounds Schedule</div>
+    <div class="section-sub">Academic Year 2024–2025 · Every Friday at Noon · Cardiovascular Center Auditorium</div>
+
+    <div class="alert">
+      <span class="alert-icon">🎥</span>
+      <div>All sessions are live-streamed via <strong>Zoom</strong> and recorded. Past recordings available on MediaSite. &nbsp;<a href="#" style="color:var(--maize);">Join Live →</a></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--blue);font-weight:600;">Spring 2025 Speaker Series</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-sm btn-maize" onclick="showPage('nominate', document.querySelectorAll('nav button')[2])">+ Nominate a Speaker</button>
+          <a href="#" class="btn btn-sm" style="text-decoration:none;">📥 Download ICS</a>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date-box"><div class="month">Jan</div><div class="day">10</div></div>
+        <div class="event-info" style="flex:1;">
+          <div class="event-title">Dr. Clyde Yancy — "Disparities in Cardiovascular Care"</div>
+          <div class="event-meta"><span>🏛️ Northwestern University</span><span>📍 CV Auditorium</span><span>🎥 Recorded</span></div>
+          <div style="margin-top:6px;"><span class="event-tag tag-gr">Grand Rounds</span><span class="event-tag tag-cme" style="margin-left:4px;">CME</span></div>
+        </div>
+        <a href="#" class="btn btn-sm" style="text-decoration:none;align-self:center;">▶ Watch</a>
+      </div>
+      <div class="event-item">
+        <div class="event-date-box"><div class="month">Jan</div><div class="day">24</div></div>
+        <div class="event-info" style="flex:1;">
+          <div class="event-title">Dr. Mariell Jessup — "Advanced Heart Failure: State of the Art"</div>
+          <div class="event-meta"><span>🏛️ American Heart Association</span><span>📍 CV Auditorium</span><span>🎥 Recorded</span></div>
+          <div style="margin-top:6px;"><span class="event-tag tag-gr">Grand Rounds</span><span class="event-tag tag-cme" style="margin-left:4px;">CME</span></div>
+        </div>
+        <a href="#" class="btn btn-sm" style="text-decoration:none;align-self:center;">▶ Watch</a>
+      </div>
+      <div class="event-item">
+        <div class="event-date-box"><div class="month">Feb</div><div class="day">7</div></div>
+        <div class="event-info" style="flex:1;">
+          <div class="event-title">Dr. Roxana Mehran — "Antithrombotic Therapy in ACS"</div>
+          <div class="event-meta"><span>🏛️ Mount Sinai</span><span>📍 CV Auditorium</span><span>🎥 Recorded</span></div>
+          <div style="margin-top:6px;"><span class="event-tag tag-gr">Grand Rounds</span></div>
+        </div>
+        <a href="#" class="btn btn-sm" style="text-decoration:none;align-self:center;">▶ Watch</a>
+      </div>
+      <div class="event-item" style="background:var(--blue-pale);border-radius:8px;padding:12px 14px;">
+        <div class="event-date-box" style="background:var(--maize);"><div class="month" style="color:var(--blue);">Apr</div><div class="day" style="color:var(--blue);">4</div></div>
+        <div class="event-info" style="flex:1;">
+          <div class="event-title">Dr. Eugene Braunwald — "The Future of Heart Failure Management" <span style="color:var(--red-accent);font-weight:700;">(UPCOMING)</span></div>
+          <div class="event-meta"><span>🏛️ Harvard Medical School</span><span>📍 CV Auditorium + Zoom</span></div>
+          <div style="margin-top:6px;"><span class="event-tag tag-gr">Grand Rounds</span><span class="event-tag tag-cme" style="margin-left:4px;">CME</span></div>
+        </div>
+        <a href="#" class="btn btn-sm btn-maize" style="text-decoration:none;align-self:center;">🖥️ Join Zoom</a>
+      </div>
+      <div class="event-item">
+        <div class="event-date-box"><div class="month">Apr</div><div class="day">11</div></div>
+        <div class="event-info" style="flex:1;">
+          <div class="event-title">Dr. Deepak Bhatt — "Cardiovascular Prevention: New Frontiers"</div>
+          <div class="event-meta"><span>🏛️ Mount Sinai</span><span>📍 CV Auditorium + Zoom</span></div>
+          <div style="margin-top:6px;"><span class="event-tag tag-gr">Grand Rounds</span><span class="event-tag tag-cme" style="margin-left:4px;">CME</span></div>
+        </div>
+        <div style="align-self:center;color:var(--gray-500);font-size:0.78rem;">Upcoming</div>
+      </div>
+      <div class="event-item">
+        <div class="event-date-box"><div class="month">Apr</div><div class="day">25</div></div>
+        <div class="event-info" style="flex:1;">
+          <div class="event-title">Speaker TBD — Interventional Cardiology Focus</div>
+          <div class="event-meta"><span>📍 CV Auditorium</span></div>
+          <div style="margin-top:6px;"><span class="event-tag tag-gr">Grand Rounds</span></div>
+        </div>
+        <div style="align-self:center;color:var(--gray-500);font-size:0.78rem;">Upcoming</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ NOMINATIONS PAGE ══════════ -->
+  <div class="page" id="page-nominate">
+    <div class="section-title">Nominate a Grand Rounds Speaker</div>
+    <div class="section-sub">Suggest a distinguished expert to present at our weekly Grand Rounds series</div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--blue);margin-bottom:18px;font-weight:600;">Nomination Form</div>
+
+        <div class="form-group">
+          <label class="form-label">Your Name *</label>
+          <input class="form-input" type="text" placeholder="e.g. Dr. Jane Smith" id="nom-submitter">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Role</label>
+          <select class="form-select" id="nom-role">
+            <option>Select role...</option>
+            <option>Faculty / Attending</option>
+            <option>Fellow (Cardiology)</option>
+            <option>Resident</option>
+            <option>Staff</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nominee Name *</label>
+          <input class="form-input" type="text" placeholder="Speaker's full name" id="nom-name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Institution / Affiliation</label>
+          <input class="form-input" type="text" placeholder="e.g. Mayo Clinic, Cleveland Clinic" id="nom-inst">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Proposed Topic / Area of Expertise</label>
+          <input class="form-input" type="text" placeholder="e.g. Structural Heart Disease, HFpEF" id="nom-topic">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Why do you recommend this speaker?</label>
+          <textarea class="form-textarea" placeholder="Share their expertise, relevance to our division, and why our trainees and faculty would benefit..." id="nom-reason"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contact information for nominee (if known)</label>
+          <input class="form-input" type="text" placeholder="Email or department" id="nom-contact">
+        </div>
+        <button class="btn btn-maize" onclick="submitNomination()">Submit Nomination →</button>
+      </div>
+
+      <div>
+        <!-- Info box -->
+        <div class="card" style="margin-bottom:20px;background:var(--blue);color:var(--white);">
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--maize);margin-bottom:10px;font-weight:600;">How It Works</div>
+          <div style="font-size:0.85rem;line-height:1.7;color:rgba(255,255,255,0.85);">
+            <p>1. Submit your nomination using this form.</p>
+            <p>2. The Grand Rounds Committee reviews submissions quarterly.</p>
+            <p>3. Selected speakers are invited and scheduled for future sessions.</p>
+            <p>4. You'll be notified by email when your nominee is scheduled.</p>
+          </div>
+        </div>
+
+        <!-- Recent nominations -->
+        <div class="card">
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--blue);margin-bottom:14px;font-weight:600;">Recent Nominations</div>
+          <div class="nom-list" id="nom-list">
+            <div class="nom-item">
+              <div><div class="nom-name">Dr. Sanjay Rajagopalan</div><div class="nom-inst">Case Western Reserve · Cardiovascular Imaging</div></div>
+              <span class="nom-badge nom-review">Under Review</span>
+            </div>
+            <div class="nom-item">
+              <div><div class="nom-name">Dr. Lynne Stevenson</div><div class="nom-inst">Vanderbilt · Advanced Heart Failure</div></div>
+              <span class="nom-badge nom-review">Under Review</span>
+            </div>
+            <div class="nom-item">
+              <div><div class="nom-name">Dr. Anita Deswal</div><div class="nom-inst">MD Anderson · Cardio-Oncology</div></div>
+              <span class="nom-badge nom-new">Newly Added</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ RESOURCES PAGE ══════════ -->
+  <div class="page" id="page-resources">
+    <div class="section-title">Resources & Links</div>
+    <div class="section-sub">CME materials, recordings, department updates, and more</div>
+
+    <div class="grid-2">
+      <div>
+        <div style="font-weight:600;color:var(--blue);font-size:0.8rem;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:12px;">📺 Grand Rounds Media</div>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">🎥</div>
+          <div><div class="resource-label">Past GR Recordings Archive</div><div class="resource-desc">Full video library on Michigan Medicine MediaSite</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">🖥️</div>
+          <div><div class="resource-label">Zoom Live Stream Link</div><div class="resource-desc">Join Friday sessions remotely — Meeting ID on file</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">📄</div>
+          <div><div class="resource-label">Speaker Slide Handouts</div><div class="resource-desc">PDF presentations uploaded after each session</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+
+        <div style="font-weight:600;color:var(--blue);font-size:0.8rem;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:12px;margin-top:24px;">🎓 CME & Education</div>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">🏅</div>
+          <div><div class="resource-label">Claim CME Credits</div><div class="resource-desc">Michigan Medicine CE portal — log attendance & credits</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">📚</div>
+          <div><div class="resource-label">Reading Materials & References</div><div class="resource-desc">Pre-reading packets distributed before each GR</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">✅</div>
+          <div><div class="resource-label">Attendance Verification</div><div class="resource-desc">Sign-in sheets and digital attendance tracking</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+      </div>
+
+      <div>
+        <div style="font-weight:600;color:var(--blue);font-size:0.8rem;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:12px;">📣 Division Communications</div>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">📰</div>
+          <div><div class="resource-label">Division Newsletter</div><div class="resource-desc">Monthly updates from Division Chief's office</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">📋</div>
+          <div><div class="resource-label">Faculty Meeting Minutes</div><div class="resource-desc">Archived minutes from division faculty meetings</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">🗓️</div>
+          <div><div class="resource-label">Department Calendar (Outlook)</div><div class="resource-desc">Subscribe to the division shared Outlook calendar</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+
+        <div style="font-weight:600;color:var(--blue);font-size:0.8rem;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:12px;margin-top:24px;">🔗 Clinical & Administrative</div>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">🏥</div>
+          <div><div class="resource-label">Epic — Michigan Medicine</div><div class="resource-desc">EHR access for clinical documentation</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">📞</div>
+          <div><div class="resource-label">Amcom / Paging System</div><div class="resource-desc">Secure messaging and on-call paging</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+        <a class="resource-item" href="#">
+          <div class="resource-icon">📝</div>
+          <div><div class="resource-label">Cardiology Policies & Protocols</div><div class="resource-desc">Clinical guidelines specific to the division</div></div>
+          <div class="resource-arrow">›</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ CONTACTS PAGE ══════════ -->
+  <div class="page" id="page-contacts">
+    <div class="section-title">Key Contacts & Phone Directory</div>
+    <div class="section-sub">Critical internal numbers for clinical operations — tap a number to call</div>
+
+    <div class="alert">
+      <span class="alert-icon">💡</span>
+      <div>For <strong>emergencies</strong>, always dial <strong>911</strong> or the hospital operator at <strong>5-5000</strong>. For rapid response: <strong>7-4000</strong>.</div>
+    </div>
+
+    <div class="grid-3">
+      <div class="contact-card">
+        <div class="contact-dept">🏢 Front Desk & Admin</div>
+        <div class="contact-row"><span class="contact-name">CV Division Front Desk</span><span class="contact-num"><a href="tel:+17347636100">7-6100</a></span></div>
+        <div class="contact-row"><span class="contact-name">Division Administrator</span><span class="contact-num"><a href="tel:+17347631234">7-1234</a></span></div>
+        <div class="contact-row"><span class="contact-name">Scheduling Office</span><span class="contact-num"><a href="tel:+17347635678">7-5678</a></span></div>
+        <div class="contact-row"><span class="contact-name">Division Chief's Office</span><span class="contact-num"><a href="tel:+17347639001">7-9001</a></span></div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-dept">🫀 Cath Lab</div>
+        <div class="contact-row"><span class="contact-name">Cath Lab Main Line</span><span class="contact-num"><a href="tel:+17347632200">7-2200</a></span></div>
+        <div class="contact-row"><span class="contact-name">Cath Lab Charge Nurse</span><span class="contact-num"><a href="tel:+17347632201">7-2201</a></span></div>
+        <div class="contact-row"><span class="contact-name">Cath Lab Call Schedule</span><span class="contact-num"><a href="tel:+17347632205">7-2205</a></span></div>
+        <div class="contact-row"><span class="contact-name">EP Lab</span><span class="contact-num"><a href="tel:+17347632300">7-2300</a></span></div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-dept">🩺 Echo Lab</div>
+        <div class="contact-row"><span class="contact-name">Echo Lab Main</span><span class="contact-num"><a href="tel:+17347633100">7-3100</a></span></div>
+        <div class="contact-row"><span class="contact-name">Echo Reading Room</span><span class="contact-num"><a href="tel:+17347633102">7-3102</a></span></div>
+        <div class="contact-row"><span class="contact-name">Stress Echo</span><span class="contact-num"><a href="tel:+17347633105">7-3105</a></span></div>
+        <div class="contact-row"><span class="contact-name">Nuclear Cardiology</span><span class="contact-num"><a href="tel:+17347633200">7-3200</a></span></div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-dept">📋 Consult Room</div>
+        <div class="contact-row"><span class="contact-name">Cardiology Consult Desk</span><span class="contact-num"><a href="tel:+17347634400">7-4400</a></span></div>
+        <div class="contact-row"><span class="contact-name">Inpatient Consult Team</span><span class="contact-num"><a href="tel:+17347634401">7-4401</a></span></div>
+        <div class="contact-row"><span class="contact-name">Cardiology Fellow On-Call</span><span class="contact-num"><a href="tel:+17347634410">7-4410</a></span></div>
+        <div class="contact-row"><span class="contact-name">CICU Attending</span><span class="contact-num"><a href="tel:+17347634420">7-4420</a></span></div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-dept">📟 Fellow Pagers</div>
+        <div class="contact-row"><span class="contact-name">1st Year Fellow (PGY-4)</span><span class="contact-num"><a href="tel:+15005551001">Pg 1001</a></span></div>
+        <div class="contact-row"><span class="contact-name">2nd Year Fellow (PGY-5)</span><span class="contact-num"><a href="tel:+15005551002">Pg 1002</a></span></div>
+        <div class="contact-row"><span class="contact-name">3rd Year Fellow (PGY-6)</span><span class="contact-num"><a href="tel:+15005551003">Pg 1003</a></span></div>
+        <div class="contact-row"><span class="contact-name">Amcom Paging System</span><span class="contact-num"><a href="tel:+17347630000">7-0000</a></span></div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-dept">🚑 Rapid Response & ICU</div>
+        <div class="contact-row"><span class="contact-name">CICU Charge Nurse</span><span class="contact-num"><a href="tel:+17347635500">7-5500</a></span></div>
+        <div class="contact-row"><span class="contact-name">Rapid Response Team</span><span class="contact-num"><a href="tel:+17347634000">7-4000</a></span></div>
+        <div class="contact-row"><span class="contact-name">Perfusion (ECMO/VAD)</span><span class="contact-num"><a href="tel:+17347635600">7-5600</a></span></div>
+        <div class="contact-row"><span class="contact-name">Cardiac Surgery Consult</span><span class="contact-num"><a href="tel:+17347637700">7-7700</a></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ FELLOWS PAGE ══════════ -->
+  <div class="page" id="page-fellows">
+    <div class="section-title">Fellows — Mentoring & Research</div>
+    <div class="section-sub">Opportunities within the Division of Cardiovascular Medicine at University of Michigan</div>
+
+    <div class="alert">
+      <span class="alert-icon">🌟</span>
+      <div>Interested in an opportunity? <strong>Contact the Program Coordinator</strong> or reach out directly to the faculty PI listed. Additional listings available on the <a href="#" style="color:var(--maize);">Division Research Portal →</a></div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;">
+      <button class="btn btn-sm btn-maize" onclick="filterOpps('all', this)">All Opportunities</button>
+      <button class="btn btn-sm" onclick="filterOpps('mentoring', this)" style="background:var(--blue-pale);color:var(--blue);">🤝 Mentoring</button>
+      <button class="btn btn-sm" onclick="filterOpps('research', this)" style="background:var(--blue-pale);color:var(--blue);">🔬 Research</button>
+    </div>
+
+    <div class="grid-3" id="opps-grid">
+      <div class="opp-card mentoring" data-type="mentoring">
+        <div class="opp-type type-m">🤝 Mentoring</div>
+        <div class="opp-title">Career Development Mentorship Program</div>
+        <div class="opp-pi">Coordinator: Fellowship Program Office</div>
+        <div class="opp-desc">One-on-one mentoring pairing with faculty across all subspecialties. Focus on career planning, board prep, and academic development throughout fellowship.</div>
+        <div class="opp-tags"><span class="opp-tag">All Fellows</span><span class="opp-tag">Career</span></div>
+        <button class="btn btn-sm btn-maize">Express Interest</button>
+      </div>
+      <div class="opp-card research" data-type="research">
+        <div class="opp-type type-r">🔬 Research</div>
+        <div class="opp-title">PREDICT-HF Biomarker Study</div>
+        <div class="opp-pi">PI: Dr. Scott Hummel · Heart Failure Section</div>
+        <div class="opp-desc">Investigating novel biomarkers in HFpEF. Fellow role includes protocol coordination, data analysis, and manuscript preparation. Clinical research exposure.</div>
+        <div class="opp-tags"><span class="opp-tag">HFpEF</span><span class="opp-tag">Biomarkers</span><span class="opp-tag">Clinical Research</span></div>
+        <button class="btn btn-sm">Contact PI</button>
+      </div>
+      <div class="opp-card research" data-type="research">
+        <div class="opp-type type-r">🔬 Research</div>
+        <div class="opp-title">AI-Assisted Echo Interpretation Project</div>
+        <div class="opp-pi">PI: Dr. Venkatesh Murthy · Imaging Section</div>
+        <div class="opp-desc">Machine learning models applied to echo reads at scale. Fellows participate in dataset curation, model evaluation, and co-authorship on publications.</div>
+        <div class="opp-tags"><span class="opp-tag">Imaging</span><span class="opp-tag">AI/ML</span><span class="opp-tag">Echo</span></div>
+        <button class="btn btn-sm">Contact PI</button>
+      </div>
+      <div class="opp-card mentoring" data-type="mentoring">
+        <div class="opp-type type-m">🤝 Mentoring</div>
+        <div class="opp-title">Women in Cardiology Mentorship Circle</div>
+        <div class="opp-pi">Lead: Dr. Kim Eagle · Division Chief Emeritus</div>
+        <div class="opp-desc">Structured peer and faculty mentoring for women in cardiology training. Includes quarterly dinners, speaker series, and networking with alumni.</div>
+        <div class="opp-tags"><span class="opp-tag">Diversity & Inclusion</span><span class="opp-tag">Networking</span></div>
+        <button class="btn btn-sm btn-maize">Express Interest</button>
+      </div>
+      <div class="opp-card research" data-type="research">
+        <div class="opp-type type-r">🔬 Research</div>
+        <div class="opp-title">LVAD Outcomes Registry Analysis</div>
+        <div class="opp-pi">PI: Dr. Francis Pagani · Cardiac Surgery / CV Medicine</div>
+        <div class="opp-desc">Longitudinal outcomes data from Michigan's LVAD program — one of the largest in the country. Fellow opportunity in database analysis and clinical outcomes research.</div>
+        <div class="opp-tags"><span class="opp-tag">LVAD</span><span class="opp-tag">HF</span><span class="opp-tag">Outcomes Research</span></div>
+        <button class="btn btn-sm">Contact PI</button>
+      </div>
+      <div class="opp-card mentoring" data-type="mentoring">
+        <div class="opp-type type-m">🤝 Mentoring</div>
+        <div class="opp-title">Interventional Cardiology Interest Track</div>
+        <div class="opp-pi">Lead: Interventional Faculty Group</div>
+        <div class="opp-desc">Designed for fellows pursuing interventional fellowship. Structured exposure to complex PCI, structural, and peripheral cases with direct faculty mentoring and application coaching.</div>
+        <div class="opp-tags"><span class="opp-tag">Interventional</span><span class="opp-tag">Structural</span><span class="opp-tag">Career Track</span></div>
+        <button class="btn btn-sm btn-maize">Express Interest</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Nomination submitted successfully! The GR Committee will be in touch.</div>
+
+<script>
+// ─── NAV ───
+function showPage(pageId, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  if(btn && btn.classList) btn.classList.add('active');
+}
+
+// ─── MINI CALENDAR ───
+const events = {
+  '2025-04-04': 'Grand Rounds', '2025-04-11': 'Grand Rounds',
+  '2025-04-18': 'Fellows Conf', '2025-04-25': 'Grand Rounds',
+  '2025-05-02': 'Grand Rounds', '2025-05-09': 'Grand Rounds',
+};
+let calYear = 2025, calMonth = 3; // April = month index 3
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const TODAY = new Date();
+
+function renderCal() {
+  const title = document.getElementById('calTitle');
+  const grid = document.getElementById('calGrid');
+  title.textContent = MONTHS[calMonth] + ' ' + calYear;
+  const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  let html = days.map(d => `<div class="cal-dow">${d}</div>`).join('');
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  for(let i=0;i<firstDay;i++) html += `<div class="cal-day empty"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const key = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday = (d===TODAY.getDate()&&calMonth===TODAY.getMonth()&&calYear===TODAY.getFullYear());
+    const hasEvent = events[key];
+    let cls = 'cal-day';
+    if(isToday) cls += ' today';
+    else if(hasEvent) cls += ' has-event';
+    html += `<div class="${cls}" title="${hasEvent||''}">${d}${hasEvent||isToday?'<div class="cal-dot"></div>':''}</div>`;
+  }
+  grid.innerHTML = html;
+}
+function calNav(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCal();}
+renderCal();
+
+// ─── NOMINATION SUBMIT ───
+function submitNomination(){
+  const name = document.getElementById('nom-name').value.trim();
+  const inst = document.getElementById('nom-inst').value.trim();
+  if(!name){alert('Please enter the nominee\'s name.');return;}
+  const list = document.getElementById('nom-list');
+  const item = document.createElement('div');
+  item.className = 'nom-item';
+  item.innerHTML = `<div><div class="nom-name">${name}</div><div class="nom-inst">${inst||'Institution not specified'}</div></div><span class="nom-badge nom-new">Newly Added</span>`;
+  list.prepend(item);
+  ['nom-submitter','nom-name','nom-inst','nom-topic','nom-reason','nom-contact'].forEach(id=>{document.getElementById(id).value='';});
+  document.getElementById('nom-role').selectedIndex=0;
+  const t = document.getElementById('toast');
+  t.style.display='block';
+  setTimeout(()=>{t.style.display='none';},4000);
+}
+
+// ─── FILTER OPPS ───
+function filterOpps(type, btn){
+  document.querySelectorAll('#opps-grid .opp-card').forEach(c=>{
+    c.style.display = (type==='all'||c.dataset.type===type)?'':'none';
+  });
+  document.querySelectorAll('[onclick^="filterOpps"]').forEach(b=>{
+    b.style.background='var(--blue-pale)';b.style.color='var(--blue)';
+  });
+  btn.style.background='var(--maize)';btn.style.color='var(--blue)';
+}
+</script>
+</body>
+</html>
